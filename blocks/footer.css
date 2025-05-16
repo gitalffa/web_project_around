@@ -10,3 +10,33 @@
   color: white;
   margin: 100px auto 30px auto;
 }
+
+@media screen and (min-width: 768px) and (max-width: 1279px) {
+  /* Estilos para tablets y laptops medianos */
+  .footer {
+    max-width: 750px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: left;
+  }
+  .footer__copy {
+    width: 750px;
+    font-family: "inter", sans-serif;
+    color: white;
+    margin: 100px auto 30px auto;
+  }
+}
+@media screen and (max-width: 767px) {
+  .footer {
+    max-width: 320px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: left;
+  }
+  .footer__copy {
+    width: 320px;
+    font-family: "inter", sans-serif;
+    color: white;
+    margin: 100px auto 30px auto;
+  }
+}

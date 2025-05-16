@@ -54,21 +54,42 @@
   transition: all 0.3s ease;
 }
 .edicion__guardar:hover {
-  border-color: gray; /* Borde azul */
+  border-color: gray;
   box-shadow: 0 4px 8px rgba(183, 178, 178, 0.3);
   background-color: rgb(27, 26, 26);
-  transform: scale(1.05); /* Efecto de "zoom" suave */
+  transform: scale(1.05);
   color: white;
 }
 .edicion__close {
   width: 40px;
   height: 40px;
   position: absolute;
-  top: 14%;
-  left: 72%;
+  top: 13%;
+  left: 66%;
   border: none;
   background-color: rgba(0, 0, 0, 0.5);
   transform: translate(-50%, -50%);
   z-index: 3;
   cursor: pointer;
+}
+@media screen and (min-width: 768px) and (max-width: 1279px) {
+  /* Estilos para tablets y laptops medianos */
+}
+@media screen and (max-width: 767px) {
+  .edicion__popup {
+    background-color: rgba(255, 255, 255, 1);
+    width: 280px;
+    height: 322px;
+    top: 20%;
+  }
+  .input__item {
+    width: 238px;
+  }
+  .edicion__guardar {
+    width: 238px;
+    height: 46px;
+  }
+  .edicion__close {
+    left: 50%;
+  }
 }
