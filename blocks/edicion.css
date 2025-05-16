@@ -91,5 +91,7 @@
   }
   .edicion__close {
     left: 50%;
+    width: 26px;
+    height: 26px;
   }
 }
