@@ -9,29 +9,30 @@
   </head>
   <body>
     <div class="page">
-      <div class="profile-editor__overlay profile-editor__overlay_hidden"></div>
-
-      <div class="profile-editor__popup profile-editor__overlay_hidden">
-        <h3 class="profile-editor__title">Editar Perfil</h3>
-
-        <form action="#" class="profile-editor__form">
-          <input type="text" class="profile-editor__input" placeholder="name" />
-          <input
-            type="text"
-            class="profile-editor__input"
-            placeholder="Degree"
-          />
-          <button type="submit" class="profile-editor__save-button">
-            Guardar
-          </button>
-        </form>
+      <div class="popup-editor-profile popup-editor-profile_hidden">
+        <div class="popup-editor-profile__overlay"></div>
+        <div class="popup-editor-profile__base">
+          <h3 class="popup-editor-profile__title">Editar Perfil</h3>
+          <form action="#" class="popup-editor-profile__form">
+            <input
+              type="text"
+              class="popup-editor-profile__input"
+              placeholder="name"
+            />
+            <input
+              type="text"
+              class="popup-editor-profile__input"
+              placeholder="Degree"
+            />
+            <button class="popup-editor-profile__save-button">Guardar</button>
+          </form>
+        </div>
+        <button class="popup-editor-profile__close-button">
+          <img src="./images/closeicon.png" alt="icono cerrar" />
+        </button>
       </div>
 
-      <button
-        class="profile-editor__close-button profile-editor__overlay_hidden"
       >
-        <img src="./images/closeicon.png" alt="icono cerrar" />
-      </button>
       <header class="header">
         <img
           src="./images/Vector.png"
@@ -52,11 +53,11 @@
               <p class="profile__degree">Explorador</p>
             </div>
 
-            <button class="profile__button button-edit">
+            <button class="profile__button profile-button-edit">
               <img src="./images/editar.png" alt="button edit" />
             </button>
           </div>
-          <button class="profile__button button-add">
+          <button class="profile__button profile-button-add">
             <img src="./images/add-image.png" alt="button add" />
           </button>
         </section>

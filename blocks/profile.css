@@ -51,7 +51,7 @@
   background-color: #383636;
   transform: scale(1.05); /* Efecto de "zoom" suave */
 }
-.button-edit {
+.profile-button-edit {
   width: 24px;
   height: 24px;
   margin-left: 15px;
@@ -59,7 +59,7 @@
   cursor: pointer;
   align-self: flex-start;
 }
-.button-add {
+.profile-button-add {
   width: 150px;
   height: 50px;
   margin-left: auto;
@@ -70,7 +70,7 @@
   .profile__avatar {
     margin-left: 10px;
   }
-  .button-add {
+  .profile-button-add {
     width: 150px;
     height: 50px;
     margin-left: auto;
@@ -81,15 +81,14 @@
   .profile {
     flex-direction: column;
   }
-  .button-add {
+  .profile-button-add {
     width: 282px;
     height: 50px;
     margin: 0 auto;
   }
-  .button-edit {
+  .profile-button-edit {
     width: 24px;
     height: 24px;
-    margin-top: -10px;
     cursor: pointer;
   }
   .profile__avatar {
