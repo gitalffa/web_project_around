@@ -28,13 +28,13 @@
 }
 @media screen and (max-width: 767px) {
   .footer {
-    max-width: 320px;
+    max-width: 300px;
     margin: 0 auto;
     display: flex;
     justify-content: left;
   }
   .footer__copy {
-    width: 320px;
+    width: 300px;
     font-family: "inter", sans-serif;
     color: white;
     margin: 100px auto 30px auto;

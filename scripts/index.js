@@ -1,6 +1,6 @@
 let page = document.querySelector(".page");
 let button_edit = page.querySelector(".button-edit");
-let fondo_negro = page.querySelector(".profile-editor__overlay--hidden");
+let fondo_negro = page.querySelector(".profile-editor__overlay_hidden");
 let page_popup_edit = page.querySelector(".profile-editor__popup");
 let cerrar_edicion = page.querySelector(".profile-editor__close-button");
 let input_item = page.querySelectorAll("profile-editor__input");
@@ -45,13 +45,13 @@ form.addEventListener("submit", (event) => {
 });
 
 function quitaNone() {
-  fondo_negro.classList.remove("profile-editor__overlay--hidden");
-  page_popup_edit.classList.remove("profile-editor__overlay--hidden");
-  cerrar_edicion.classList.remove("profile-editor__overlay--hidden");
+  fondo_negro.classList.remove("profile-editor__overlay_hidden");
+  page_popup_edit.classList.remove("profile-editor__overlay_hidden");
+  cerrar_edicion.classList.remove("profile-editor__overlay_hidden");
 }
 
 function poneNone() {
-  fondo_negro.classList.add("profile-editor__overlay--hidden");
-  page_popup_edit.classList.add("profile-editor__overlay--hidden");
-  cerrar_edicion.classList.add("profile-editor__overlay--hidden");
+  fondo_negro.classList.add("profile-editor__overlay_hidden");
+  page_popup_edit.classList.add("profile-editor__overlay_hidden");
+  cerrar_edicion.classList.add("profile-editor__overlay_hidden");
 }
