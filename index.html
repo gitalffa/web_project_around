@@ -9,16 +9,29 @@
   </head>
   <body>
     <div class="page">
-      <div class="edicion__fondo modo-edicion-none"></div>
-      <div class="edicion__popup modo-edicion-none">
-        <h3 class="edicion__title">Editar Perfil</h3>
-        <form action="#" class="edicion__form">
-          <input type="text" class="input__item" placeholder="name" />
-          <input type="text" class="input__item" placeholder="Degree" />
-          <button type="submit" class="edicion__guardar">Guardar</button>
+      <div
+        class="profile-editor__overlay profile-editor__overlay--hidden"
+      ></div>
+
+      <div class="profile-editor__popup profile-editor__overlay--hidden">
+        <h3 class="profile-editor__title">Editar Perfil</h3>
+
+        <form action="#" class="profile-editor__form">
+          <input type="text" class="profile-editor__input" placeholder="name" />
+          <input
+            type="text"
+            class="profile-editor__input"
+            placeholder="Degree"
+          />
+          <button type="submit" class="profile-editor__save-button">
+            Guardar
+          </button>
         </form>
       </div>
-      <button class="edicion__close modo-edicion-none">
+
+      <button
+        class="profile-editor__close-button profile-editor__overlay--hidden"
+      >
         <img src="./images/closeicon.png" alt="icono cerrar" />
       </button>
       <header class="header">

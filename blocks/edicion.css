@@ -1,4 +1,4 @@
-.edicion__fondo {
+.profile-editor__overlay {
   position: absolute;
   top: 0;
   left: 0;
@@ -8,7 +8,7 @@
   z-index: 1;
 }
 
-.edicion__popup {
+.profile-editor__popup {
   background-color: rgba(255, 255, 255, 1);
   width: 430px;
   height: 330px;
@@ -20,27 +20,27 @@
   transform: translate(-50%, -50%);
   z-index: 2;
 }
-.modo-edicion-none {
+.profile-editor__overlay--hidden {
   display: none;
 }
-.edicion__title {
+.profile-editor__title {
   margin: 30px 0 30px 30px;
   font-size: 24px;
   font-family: "inter", sans-serif;
 }
 
-.edicion__form {
+.profile-editor__form {
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
-.input__item {
+.profile-editor__input {
   width: 358px;
   margin: 20px auto;
   border: none;
   border-bottom: 2px solid rgba(115, 107, 107, 0.3);
 }
-.edicion__guardar {
+.profile-editor__save-button {
   width: 358px;
   height: 50px;
   margin: 0 auto;
@@ -53,14 +53,14 @@
   cursor: pointer;
   transition: all 0.3s ease;
 }
-.edicion__guardar:hover {
+.profile-editor__save-button:hover {
   border-color: gray;
   box-shadow: 0 4px 8px rgba(183, 178, 178, 0.3);
   background-color: rgb(27, 26, 26);
   transform: scale(1.05);
   color: white;
 }
-.edicion__close {
+.profile-editor__close-button {
   width: 40px;
   height: 40px;
   position: absolute;
@@ -76,20 +76,20 @@
   /* Estilos para tablets y laptops medianos */
 }
 @media screen and (max-width: 767px) {
-  .edicion__popup {
+  .profile-editor__overlay {
     background-color: rgba(255, 255, 255, 1);
     width: 280px;
     height: 322px;
     top: 20%;
   }
-  .input__item {
+  .profile-editor__input {
     width: 238px;
   }
-  .edicion__guardar {
+  .profile-editor__save-button {
     width: 238px;
     height: 46px;
   }
-  .edicion__close {
+  .profile-editor__close-button {
     left: 50%;
     width: 26px;
     height: 26px;
