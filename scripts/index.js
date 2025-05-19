@@ -1,17 +1,19 @@
-let page = document.querySelector(".page");
-let buttonEdit = page.querySelector(".profile-button-edit");
-let popupEditorProfile = page.querySelector(".popup-editor-profile");
-let popupEditorProfileBase = page.querySelector(".popup-editor-profile__base");
-let popupEditorProfileCerrar = page.querySelector(
+const page = document.querySelector(".page");
+const buttonEdit = page.querySelector(".profile-button-edit");
+const popupEditorProfile = page.querySelector(".popup-editor-profile");
+const popupEditorProfileBase = page.querySelector(
+  ".popup-editor-profile__base"
+);
+const popupEditorProfileCerrar = page.querySelector(
   ".popup-editor-profile__close-button"
 );
-let popupEditorProfileInput = page.querySelectorAll(
+const popupEditorProfileInput = page.querySelectorAll(
   ".popup-editor-profile__input"
 );
 const profileId = document.querySelector(".profile__id");
 
-const profileName = document.querySelector(".profile__name");
-const profileDegree = document.querySelector(".profile__degree");
+const profileName = profileId.querySelector(".profile__name");
+const profileDegree = profileId.querySelector(".profile__degree");
 
 function manipulaFormEdit() {
   quitaNone();
