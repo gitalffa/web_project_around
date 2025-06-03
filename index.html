@@ -9,9 +9,9 @@
   </head>
   <body>
     <div class="page">
-      <div class="popup-editor-profile popup-editor-profile_hidden">
-        <div class="popup-editor-profile__overlay"></div>
-        <div class="popup-editor-profile__base">
+      <div class="popup-editor-profile popup_hidden">
+        <div class="popup__overlay"></div>
+        <div class="popup__base">
           <h3 class="popup-editor-profile__title">Editar Perfil</h3>
           <form action="#" class="popup-editor-profile__form">
             <input
@@ -28,6 +28,28 @@
           </form>
         </div>
         <button class="popup-editor-profile__close-button">
+          <img src="./images/closeicon.png" alt="icono cerrar" />
+        </button>
+      </div>
+      <div class="popup-add-card popup_hidden">
+        <div class="popup__overlay"></div>
+        <div class="popup__base">
+          <h3 class="popup-add-card__title">Nuevo Lugar</h3>
+          <form action="#" class="popup-add-card__form">
+            <input
+              type="text"
+              class="popup-add-card__input"
+              placeholder="Titulo"
+            />
+            <input
+              type="text"
+              class="popup-add-card__input"
+              placeholder="Enlace a la imagen"
+            />
+            <button class="popup-add-card__save-button">Guardar</button>
+          </form>
+        </div>
+        <button class="popup-add-card__close-button">
           <img src="./images/closeicon.png" alt="icono cerrar" />
         </button>
       </div>
@@ -61,86 +83,19 @@
             <img src="./images/add-image.png" alt="button add" />
           </button>
         </section>
-        <section class="gallery">
+
+        <section class="gallery"></section>
+        <template id="plantilla">
           <div class="card">
-            <img
-              src="./images/valledeyosemite.jpg"
-              alt="foto valle de yosemite"
-              class="card__image"
-            />
+            <img src="" alt="" class="card__image" />
             <div class="card__footer">
-              <span class="card__title block">Lago Louise</span>
+              <span class="card__title block"></span>
               <button class="card__favorite" aria-label="Guardar favorito">
                 ♡
               </button>
             </div>
           </div>
-          <div class="card">
-            <img
-              src="./images/lagolouise.png"
-              alt="foto valle de yosemite"
-              class="card__image"
-            />
-            <div class="card__footer">
-              <span class="card__title block">Lago Louise</span>
-              <button class="card__favorite" aria-label="Guardar favorito">
-                ♡
-              </button>
-            </div>
-          </div>
-          <div class="card">
-            <img
-              src="./images/montanascalvas.png"
-              alt="foto Montañas calvas"
-              class="card__image"
-            />
-            <div class="card__footer">
-              <span class="card__title block">Montañas Calvas</span>
-              <button class="card__favorite" aria-label="Guardar favorito">
-                ♡
-              </button>
-            </div>
-          </div>
-          <div class="card">
-            <img
-              src="./images/latemar.png"
-              alt="foto Latemar"
-              class="card__image"
-            />
-            <div class="card__footer">
-              <span class="card__title block">Latemar</span>
-              <button class="card__favorite" aria-label="Guardar favorito">
-                ♡
-              </button>
-            </div>
-          </div>
-          <div class="card">
-            <img
-              src="./images/vanois.png"
-              alt="foto Parque nacional de la Vanoise"
-              class="card__image"
-            />
-            <div class="card__footer">
-              <span class="card__title block">Vanoise National park</span>
-              <button class="card__favorite" aria-label="Guardar favorito">
-                ♡
-              </button>
-            </div>
-          </div>
-          <div class="card">
-            <img
-              src="./images/lagodi.png"
-              alt="foto lago di braies"
-              class="card__image"
-            />
-            <div class="card__footer">
-              <span class="card__title block">Lago Louise</span>
-              <button class="card__favorite" aria-label="Guardar favorito">
-                ♡
-              </button>
-            </div>
-          </div>
-        </section>
+        </template>
       </main>
       <footer class="footer">
         <span class="footer__copy">&copy; 2025 Fabricio Galindo Copado</span>

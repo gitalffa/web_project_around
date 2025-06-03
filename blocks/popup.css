@@ -1,4 +1,4 @@
-.popup-editor-profile__overlay {
+.popup__overlay {
   position: absolute;
   top: 0;
   left: 0;
@@ -8,11 +8,11 @@
   z-index: 1;
 }
 
-.popup-editor-profile__base {
+.popup__base {
   background-color: rgba(255, 255, 255, 1);
+  border: 1px solid white;
   width: 430px;
   height: 330px;
-  border: 1px solid white;
   border-radius: 8px;
   position: absolute;
   top: 30%;
@@ -20,10 +20,16 @@
   transform: translate(-50%, -50%);
   z-index: 2;
 }
-.popup-editor-profile_hidden {
+
+.popup_hidden {
   display: none;
 }
 .popup-editor-profile__title {
+  margin: 30px 0 30px 30px;
+  font-size: 24px;
+  font-family: "inter", sans-serif;
+}
+.popup-add-card__title {
   margin: 30px 0 30px 30px;
   font-size: 24px;
   font-family: "inter", sans-serif;
@@ -34,13 +40,37 @@
   flex-direction: column;
   justify-content: center;
 }
+.popup-add-card__form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
 .popup-editor-profile__input {
   width: 358px;
   margin: 20px auto;
   border: none;
   border-bottom: 2px solid rgba(115, 107, 107, 0.3);
 }
+.popup-add-card__input {
+  width: 358px;
+  margin: 20px auto;
+  border: none;
+  border-bottom: 2px solid rgba(115, 107, 107, 0.3);
+}
 .popup-editor-profile__save-button {
+  width: 358px;
+  height: 50px;
+  margin: 0 auto;
+  font-family: "inter", sans-serif;
+  background-color: black;
+
+  color: white;
+  border-color: gray;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.popup-add-card__save-button {
   width: 358px;
   height: 50px;
   margin: 0 auto;
@@ -60,7 +90,26 @@
   transform: scale(1.05);
   color: white;
 }
+.popup-add-card__save-button:hover {
+  border-color: gray;
+  box-shadow: 0 4px 8px rgba(183, 178, 178, 0.3);
+  background-color: rgb(27, 26, 26);
+  transform: scale(1.05);
+  color: white;
+}
 .popup-editor-profile__close-button {
+  width: 40px;
+  height: 40px;
+  position: absolute;
+  top: 13%;
+  left: 66%;
+  border: none;
+  background-color: rgba(0, 0, 0, 0.5);
+  transform: translate(-50%, -50%);
+  z-index: 3;
+  cursor: pointer;
+}
+.popup-add-card__close-button {
   width: 40px;
   height: 40px;
   position: absolute;
@@ -76,7 +125,7 @@
   /* Estilos para tablets y laptops medianos */
 }
 @media screen and (max-width: 767px) {
-  .popup-editor-profile__base {
+  .popup__base {
     background-color: rgba(255, 255, 255, 1);
     width: 280px;
     height: 322px;
@@ -89,7 +138,7 @@
     width: 238px;
     height: 46px;
   }
-  .popup-editor-profile__close-button {
+  .popup__close-button {
     left: 50%;
     width: 26px;
     height: 26px;

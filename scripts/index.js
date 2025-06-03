@@ -1,12 +1,15 @@
+//const { cloneElement } = require("react");
+
 const page = document.querySelector(".page");
 const buttonEdit = page.querySelector(".profile-button-edit");
 const popupEditorProfile = page.querySelector(".popup-editor-profile");
-const popupEditorProfileBase = page.querySelector(
-  ".popup-editor-profile__base"
-);
+const popupButtonAdd = page.querySelector(".profile-button-add");
+const popupAddCard = page.querySelector(".popup-add-card");
+const popupEditorProfileBase = page.querySelector(".popup__base");
 const popupEditorProfileCerrar = page.querySelector(
   ".popup-editor-profile__close-button"
 );
+const popupAddCardCerrar = page.querySelector(".popup-add-card__close-button");
 const popupEditorProfileInput = page.querySelectorAll(
   ".popup-editor-profile__input"
 );
@@ -16,7 +19,7 @@ const profileName = profileId.querySelector(".profile__name");
 const profileDegree = profileId.querySelector(".profile__degree");
 
 function manipulaFormEdit() {
-  quitaNone();
+  quitaNoneEditor();
   const nombre = profileId.querySelector(".profile__name").textContent;
   const grado = profileId.querySelector(".profile__degree").textContent;
   const inputs = document.querySelectorAll(
@@ -26,33 +29,128 @@ function manipulaFormEdit() {
   inputs[1].value = grado;
 }
 
+popupEditorProfileCerrar.addEventListener("click", cerrarEdicion);
 function cerrarEdicion() {
-  poneNone();
+  poneNoneEditor();
+}
+popupAddCardCerrar.addEventListener("click", cerrarAddCard);
+function cerrarAddCard() {
+  poneNoneAddCard();
 }
 
 buttonEdit.addEventListener("click", manipulaFormEdit);
-popupEditorProfileCerrar.addEventListener("click", cerrarEdicion);
-const form = document.querySelector(".popup-editor-profile__form");
-const inputNombre = form.querySelector(
+
+const formEditProfile = document.querySelector(".popup-editor-profile__form");
+const inputNombre = formEditProfile.querySelector(
   '.popup-editor-profile__input[placeholder="name"]'
 );
-const inputGrado = form.querySelector(
+const inputGrado = formEditProfile.querySelector(
   '.popup-editor-profile__input[placeholder="Degree"]'
 );
 
-form.addEventListener("submit", (event) => {
+formEditProfile.addEventListener("submit", (event) => {
   event.preventDefault(); // prevenir recarga de página
 
   // 3. Actualizar el contenido del perfil
   profileName.textContent = inputNombre.value;
   profileDegree.textContent = inputGrado.value;
-  poneNone();
+  poneNoneEditor();
 });
 
-function quitaNone() {
-  popupEditorProfile.classList.remove("popup-editor-profile_hidden");
+function quitaNoneEditor() {
+  popupEditorProfile.classList.remove("popup_hidden");
+}
+function quitaNoneAddCard() {
+  popupAddCard.classList.remove("popup_hidden");
 }
 
-function poneNone() {
-  popupEditorProfile.classList.add("popup-editor-profile_hidden");
+function poneNoneEditor() {
+  popupEditorProfile.classList.add("popup_hidden");
 }
+function poneNoneAddCard() {
+  popupAddCard.classList.add("popup_hidden");
+}
+
+const initialCards = [
+  {
+    name: "Valle de Yosemite",
+    link: "https://practicum-content.s3.us-west-1.amazonaws.com/new-markets/WEB_sprint_5/ES/yosemite.jpg",
+  },
+  {
+    name: "Lago Louise",
+    link: "https://practicum-content.s3.us-west-1.amazonaws.com/new-markets/WEB_sprint_5/ES/lake-louise.jpg",
+  },
+  {
+    name: "Montañas Calvas",
+    link: "https://practicum-content.s3.us-west-1.amazonaws.com/new-markets/WEB_sprint_5/ES/bald-mountains.jpg",
+  },
+  {
+    name: "Latemar",
+    link: "https://practicum-content.s3.us-west-1.amazonaws.com/new-markets/WEB_sprint_5/ES/latemar.jpg",
+  },
+  {
+    name: "Parque Nacional de la Vanoise",
+    link: "https://practicum-content.s3.us-west-1.amazonaws.com/new-markets/WEB_sprint_5/ES/vanoise.jpg",
+  },
+  {
+    name: "Lago di Braies",
+    link: "https://practicum-content.s3.us-west-1.amazonaws.com/new-markets/WEB_sprint_5/ES/lago.jpg",
+  },
+];
+
+function inicializaGallery(cards) {
+  const contenedor = document.querySelector(".gallery");
+  const plantilla = document.querySelector("#plantilla").content;
+  contenedor.innerHTML = ""; // Limpiar por si acaso
+  initialCards.forEach((item) => {
+    const clon = plantilla.cloneNode(true);
+    clon.querySelector(".card__image").src = item.link;
+    clon.querySelector(".card__title").textContent = item.name;
+    contenedor.appendChild(clon);
+  });
+}
+
+function renderSingleCard(item) {
+  const contenedor = document.querySelector(".gallery");
+  const platilla = document.querySelector("#plantilla").content;
+
+  const clon = platilla.cloneNode(true);
+  clon.querySelector(".card__image").src = item.link;
+  clon.querySelector(".card__title").textContent = item.name;
+  contenedor.prepend(clon);
+}
+
+function addItemArray(name, link) {
+  const newItem = { name, link };
+  initialCards.unshift(newItem);
+  renderSingleCard(newItem);
+}
+
+inicializaGallery(initialCards);
+
+function manipulaFormAddCard() {
+  quitaNoneAddCard();
+  const inputs = document.querySelectorAll(
+    ".popup-add-card__form .popup-add-card__input"
+  );
+  inputs[0].value = "";
+  inputs[1].value = "";
+}
+
+popupButtonAdd.addEventListener("click", manipulaFormAddCard);
+
+const formAddCard = document.querySelector(".popup-add-card__form");
+const inputTitle = formAddCard.querySelector(
+  '.popup-add-card__input[placeholder="Titulo"]'
+);
+const inputLink = formAddCard.querySelector(
+  '.popup-add-card__input[placeholder="Enlace a la imagen"]'
+);
+inputTitle.value = "";
+inputLink.value = "";
+
+formAddCard.addEventListener("submit", (event) => {
+  event.preventDefault(); // prevenir recarga de página
+  addItemArray(inputTitle.value, inputLink.value);
+  poneNoneAddCard();
+});
