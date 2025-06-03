@@ -53,6 +53,9 @@
   transform: scale(1.3);
   color: red;
 }
+.card__favorite-red {
+  color: red;
+}
 
 .block {
   text-overflow: ellipsis;

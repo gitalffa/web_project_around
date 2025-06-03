@@ -1,20 +1,18 @@
-//const { cloneElement } = require("react");
-
+// Declaracion de variables
+//variables generales
 const page = document.querySelector(".page");
+const popupEditorProfileBase = page.querySelector(".popup__base");
+
+//seccion profile
 const buttonEdit = page.querySelector(".profile-button-edit");
 const popupEditorProfile = page.querySelector(".popup-editor-profile");
-const popupButtonAdd = page.querySelector(".profile-button-add");
-const popupAddCard = page.querySelector(".popup-add-card");
-const popupEditorProfileBase = page.querySelector(".popup__base");
 const popupEditorProfileCerrar = page.querySelector(
   ".popup-editor-profile__close-button"
 );
-const popupAddCardCerrar = page.querySelector(".popup-add-card__close-button");
 const popupEditorProfileInput = page.querySelectorAll(
   ".popup-editor-profile__input"
 );
 const profileId = document.querySelector(".profile__id");
-
 const profileName = profileId.querySelector(".profile__name");
 const profileDegree = profileId.querySelector(".profile__degree");
 
@@ -32,10 +30,6 @@ function manipulaFormEdit() {
 popupEditorProfileCerrar.addEventListener("click", cerrarEdicion);
 function cerrarEdicion() {
   poneNoneEditor();
-}
-popupAddCardCerrar.addEventListener("click", cerrarAddCard);
-function cerrarAddCard() {
-  poneNoneAddCard();
 }
 
 buttonEdit.addEventListener("click", manipulaFormEdit);
@@ -60,13 +54,23 @@ formEditProfile.addEventListener("submit", (event) => {
 function quitaNoneEditor() {
   popupEditorProfile.classList.remove("popup_hidden");
 }
+function poneNoneEditor() {
+  popupEditorProfile.classList.add("popup_hidden");
+}
+
+//seccion gallery
+const popupButtonAdd = page.querySelector(".profile-button-add");
+const popupAddCard = page.querySelector(".popup-add-card");
+const popupAddCardCerrar = page.querySelector(".popup-add-card__close-button");
+popupAddCardCerrar.addEventListener("click", cerrarAddCard);
+function cerrarAddCard() {
+  poneNoneAddCard();
+}
+
 function quitaNoneAddCard() {
   popupAddCard.classList.remove("popup_hidden");
 }
 
-function poneNoneEditor() {
-  popupEditorProfile.classList.add("popup_hidden");
-}
 function poneNoneAddCard() {
   popupAddCard.classList.add("popup_hidden");
 }
@@ -154,3 +158,14 @@ formAddCard.addEventListener("submit", (event) => {
   addItemArray(inputTitle.value, inputLink.value);
   poneNoneAddCard();
 });
+
+//favorito
+const favorito = document.querySelector(".gallery");
+favorito.addEventListener("click", (event) => {
+  if (event.target.classList.contains("card__favorite")) {
+    const card = event.target.closest(".card__favorite");
+    card.classList.toggle("card__favorite-red");
+  }
+});
+
+//borrar card
