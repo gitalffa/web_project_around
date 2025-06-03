@@ -168,3 +168,20 @@ favorito.addEventListener("click", (event) => {
 });
 
 //borrar card
+document.querySelector(".gallery").addEventListener("click", (event) => {
+  if (event.target.classList.contains("card__delete")) {
+    const card = event.target.closest(".card");
+    const index = parseInt(card.dataset.index, 10);
+    card.remove();
+    if (!isNaN(index)) {
+      initialCards.splice(index, 1);
+    }
+
+    document
+      .querySelectorAll(".gallery .card")
+      .forEach((cardElement, newIndex) => {
+        cardElement.dataset.index = newIndex;
+      });
+    //renderAllCards(initialCards);
+  }
+});

@@ -14,6 +14,7 @@
   background-color: white;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
 }
 
 .card:hover {
@@ -47,8 +48,9 @@
   padding: 0;
   margin: 0;
   font-size: 28px;
+  cursor: pointer;
   /* color: black;*/
-  /*transition: transform 0.2s ease, color 0.2s ease;*/
+  transition: transform 0.2s ease, color 0.2s ease;
 }
 
 .card__favorite:hover {
@@ -64,4 +66,20 @@
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
+}
+
+.card__delete {
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  font-size: 18px;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 2;
+  cursor: pointer;
+}
+.card__delete:hover {
+  transform: scale(1.3);
 }
