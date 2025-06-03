@@ -44,16 +44,19 @@
 .card__favorite {
   background: none;
   border: none;
-  font-size: 24px;
-  cursor: pointer;
-  transition: transform 0.2s;
+  padding: 0;
+  margin: 0;
+  font-size: 28px;
+  /* color: black;*/
+  /*transition: transform 0.2s ease, color 0.2s ease;*/
 }
 
 .card__favorite:hover {
   transform: scale(1.3);
-  color: red;
 }
-.card__favorite-red {
+
+/* El color rojo se aplica cuando está activado, no solo por hover */
+.card__favorite.card__favorite-red {
   color: red;
 }
 

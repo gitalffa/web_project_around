@@ -163,8 +163,7 @@ formAddCard.addEventListener("submit", (event) => {
 const favorito = document.querySelector(".gallery");
 favorito.addEventListener("click", (event) => {
   if (event.target.classList.contains("card__favorite")) {
-    const card = event.target.closest(".card__favorite");
-    card.classList.toggle("card__favorite-red");
+    event.target.classList.toggle("card__favorite-red");
   }
 });
 
