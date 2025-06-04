@@ -185,3 +185,5 @@ document.querySelector(".gallery").addEventListener("click", (event) => {
     //renderAllCards(initialCards);
   }
 });
+
+// zoom imagen
