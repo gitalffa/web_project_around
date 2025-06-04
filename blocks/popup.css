@@ -1,4 +1,13 @@
-.popup__overlay {
+.popup-editor-profile__overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1;
+}
+.popup-add-card__overlay {
   position: absolute;
   top: 0;
   left: 0;
@@ -8,7 +17,19 @@
   z-index: 1;
 }
 
-.popup__base {
+.popup-editor-profile__base {
+  background-color: rgba(255, 255, 255, 1);
+  border: 1px solid white;
+  width: 430px;
+  height: 330px;
+  border-radius: 8px;
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 4;
+}
+.popup-add-card__base {
   background-color: rgba(255, 255, 255, 1);
   border: 1px solid white;
   width: 430px;
@@ -121,6 +142,53 @@
   z-index: 3;
   cursor: pointer;
 }
+
+.popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.popup__contenido {
+  position: relative;
+}
+
+.popup__imagen {
+  max-width: 75vw;
+  max-height: 75vh;
+  border-radius: 8px;
+  box-shadow: 0 0 10px black;
+}
+
+.popup__cerrar {
+  position: absolute;
+  top: -25px;
+  right: -25px;
+  background: none;
+  padding: 0;
+  margin: 0;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 24px;
+  padding: 5px;
+  color: white;
+}
+
+.popup__footer {
+  font-family: "inter", sans-serif;
+  z-index: 5;
+  font-size: 16px;
+  color: white;
+}
+
 @media screen and (min-width: 768px) and (max-width: 1279px) {
   /* Estilos para tablets y laptops medianos */
 }

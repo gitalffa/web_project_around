@@ -14,9 +14,16 @@
   </head>
   <body>
     <div class="page">
+      <div class="popup" id="popupImage">
+        <div class="popup__contenido">
+          <img src="" alt="Imagen Ampliada" class="popup__imagen" />
+          <button class="popup__cerrar">✖</button>
+          <p class="popup__footer"></p>
+        </div>
+      </div>
       <div class="popup-editor-profile popup_hidden">
-        <div class="popup__overlay"></div>
-        <div class="popup__base">
+        <div class="popup-editor-profile__overlay"></div>
+        <div class="popup-editor-profile__base">
           <h3 class="popup-editor-profile__title">Editar Perfil</h3>
           <form action="#" class="popup-editor-profile__form">
             <input
@@ -37,8 +44,8 @@
         </button>
       </div>
       <div class="popup-add-card popup_hidden">
-        <div class="popup__overlay"></div>
-        <div class="popup__base">
+        <div class="popup-add-card__overlay"></div>
+        <div class="popup-add-card__base">
           <h3 class="popup-add-card__title">Nuevo Lugar</h3>
           <form action="#" class="popup-add-card__form">
             <input

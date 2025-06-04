@@ -1,7 +1,9 @@
 // Declaracion de variables
 //variables generales
 const page = document.querySelector(".page");
-const popupEditorProfileBase = page.querySelector(".popup__base");
+const popupEditorProfileBase = page.querySelector(
+  ".popup-editor-profile__base"
+);
 
 //seccion profile
 const buttonEdit = page.querySelector(".profile-button-edit");
@@ -109,6 +111,7 @@ function inicializaGallery(cards) {
   initialCards.forEach((item) => {
     const clon = plantilla.cloneNode(true);
     clon.querySelector(".card__image").src = item.link;
+    clon.querySelector(".card__image").alt = item.name;
     clon.querySelector(".card__title").textContent = item.name;
     contenedor.appendChild(clon);
   });
@@ -120,6 +123,7 @@ function renderSingleCard(item) {
 
   const clon = platilla.cloneNode(true);
   clon.querySelector(".card__image").src = item.link;
+  clon.querySelector(".card__image").alt = item.name;
   clon.querySelector(".card__title").textContent = item.name;
   contenedor.prepend(clon);
 }
@@ -187,3 +191,22 @@ document.querySelector(".gallery").addEventListener("click", (event) => {
 });
 
 // zoom imagen
+const popup = document.querySelector(".popup");
+const imagenPopup = popup.querySelector(".popup__imagen");
+const cerrarPopup = popup.querySelector(".popup__cerrar");
+const popupFooter = popup.querySelector(".popup__footer");
+
+// Mostrar popup al hacer clic en una imagen
+document.querySelector(".gallery").addEventListener("click", (event) => {
+  console.log(event.target);
+  if (event.target.classList.contains("card__image")) {
+    imagenPopup.src = event.target.src;
+    popupFooter.textContent = event.target.alt;
+    popup.style.display = "flex";
+  }
+});
+
+// Cerrar popup al hacer clic en el botón
+cerrarPopup.addEventListener("click", () => {
+  popup.style.display = "none";
+});
