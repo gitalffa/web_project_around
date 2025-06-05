@@ -24,7 +24,7 @@
   height: 330px;
   border-radius: 8px;
   position: absolute;
-  top: 30%;
+  top: 10%;
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 4;
@@ -36,7 +36,7 @@
   height: 330px;
   border-radius: 8px;
   position: absolute;
-  top: 30%;
+  top: 10%;
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 4;
@@ -119,28 +119,34 @@
   color: white;
 }
 .popup-editor-profile__close-button {
-  width: 40px;
-  height: 40px;
+  font-size: 32px;
   position: absolute;
-  top: 13%;
-  left: 66%;
+  top: -10px;
+  right: -10px;
   border: none;
-  background-color: rgba(0, 0, 0, 0.5);
+
   transform: translate(-50%, -50%);
   z-index: 3;
   cursor: pointer;
+  background: none;
+  padding: 0;
+  margin: 0;
+  color: white;
 }
 .popup-add-card__close-button {
-  width: 40px;
-  height: 40px;
+  font-size: 32px;
   position: absolute;
-  top: 13%;
-  left: 66%;
+  top: -10px;
+  right: -10px;
   border: none;
-  background-color: rgba(0, 0, 0, 0.5);
+
   transform: translate(-50%, -50%);
   z-index: 3;
   cursor: pointer;
+  background: none;
+  padding: 0;
+  margin: 0;
+  color: white;
 }
 
 .popup {
@@ -217,5 +223,13 @@
   .popup-add-card__save-button {
     width: 238px;
     height: 46px;
+  }
+  .popup-editor-profile__base {
+    width: 282px;
+    height: 322px;
+  }
+  .popup-add-card__base {
+    width: 282px;
+    height: 322px;
   }
 }
