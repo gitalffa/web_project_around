@@ -25,18 +25,35 @@
         <div class="popup-editor-profile__overlay"></div>
         <div class="popup-editor-profile__base">
           <h3 class="popup-editor-profile__title">Editar Perfil</h3>
-          <form action="#" class="popup-editor-profile__form">
-            <input
-              type="text"
-              class="popup-editor-profile__input"
-              placeholder="name"
-            />
-            <input
-              type="text"
-              class="popup-editor-profile__input"
-              placeholder="Degree"
-            />
-            <button class="popup-editor-profile__save-button">Guardar</button>
+          <form action="#" class="popup-editor-profile__form" id="form">
+            <label class="popup-form__field">
+              <input
+                type="text"
+                class="popup-editor-profile__input"
+                placeholder="name"
+                minlength="3"
+                maxlength="40"
+                id="name"
+                required
+              />
+              <span class="popup-form__input-error name-error"></span>
+            </label>
+            <label class="popup-form__field">
+              <input
+                type="text"
+                class="popup-editor-profile__input"
+                placeholder="Degree"
+                minlength="3"
+                maxlength="40"
+                id="degree"
+                required
+              />
+              <span class="popup-form__input-error degree-error"></span>
+            </label>
+
+            <button class="popup-editor-profile__save-button" type="submit">
+              Guardar
+            </button>
           </form>
           <button class="popup-editor-profile__close-button">✖</button>
         </div>
@@ -45,18 +62,34 @@
         <div class="popup-add-card__overlay"></div>
         <div class="popup-add-card__base">
           <h3 class="popup-add-card__title">Nuevo Lugar</h3>
-          <form action="#" class="popup-add-card__form">
-            <input
-              type="text"
-              class="popup-add-card__input"
-              placeholder="Titulo"
-            />
-            <input
-              type="text"
-              class="popup-add-card__input"
-              placeholder="Enlace a la imagen"
-            />
-            <button class="popup-add-card__save-button">Guardar</button>
+          <form action="#" class="popup-add-card__form" id="form">
+            <label class="popup-form__field">
+              <input
+                type="text"
+                class="popup-add-card__input"
+                placeholder="Titulo"
+                minlength="2"
+                maxlength="30"
+                id="titulo"
+                required
+              />
+              <span class="popup-form__input-error titulo-error"></span>
+            </label>
+            <label class="popup-form__field">
+              <input
+                type="url"
+                class="popup-add-card__input"
+                placeholder="Enlace a la imagen"
+                minlength="2"
+                id="enlace"
+                required
+              />
+              <span class="popup-form__input-error enlace-error"></span>
+            </label>
+
+            <button class="popup-add-card__save-button" type="submit">
+              Guardar
+            </button>
           </form>
           <button class="popup-add-card__close-button">✖</button>
         </div>
@@ -111,5 +144,6 @@
       </footer>
     </div>
     <script type="module" src="./scripts/index.js"></script>
+    <script type="module" src="./scripts/validate.js"></script>
   </body>
 </html>

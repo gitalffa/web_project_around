@@ -198,7 +198,6 @@ const popupFooter = popup.querySelector(".popup__footer");
 
 // Mostrar popup al hacer clic en una imagen
 document.querySelector(".gallery").addEventListener("click", (event) => {
-  console.log(event.target);
   if (event.target.classList.contains("card__image")) {
     imagenPopup.src = event.target.src;
     popupFooter.textContent = event.target.alt;
@@ -206,7 +205,33 @@ document.querySelector(".gallery").addEventListener("click", (event) => {
   }
 });
 
+document.querySelector(".popup").addEventListener("click", (evt) => {
+  if (evt.target.classList.contains("popup")) {
+    popup.style.display = "none";
+  }
+});
+
 // Cerrar popup al hacer clic en el botón
 cerrarPopup.addEventListener("click", () => {
   popup.style.display = "none";
+});
+
+//cerrar con escape popup's imagen
+
+document.addEventListener("keydown", function (evt) {
+  if (evt.key === "Escape") {
+    popup.style.display = "none";
+    poneNoneAddCard();
+    poneNoneEditor();
+  }
+});
+
+const overEditor = document.querySelector(".popup-editor-profile__overlay");
+overEditor.addEventListener("click", () => {
+  poneNoneEditor();
+});
+
+const overCard = document.querySelector(".popup-add-card__overlay");
+overCard.addEventListener("click", () => {
+  poneNoneAddCard();
 });
