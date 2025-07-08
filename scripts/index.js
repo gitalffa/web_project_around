@@ -1,3 +1,5 @@
+import { initialCards, Card } from "./Card.js";
+
 // Declaracion de variables
 //variables generales
 const page = document.querySelector(".page");
@@ -76,46 +78,11 @@ function quitaNoneAddCard() {
 function poneNoneAddCard() {
   popupAddCard.classList.add("popup_hidden");
 }
-
-const initialCards = [
-  {
-    name: "Valle de Yosemite",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/new-markets/WEB_sprint_5/ES/yosemite.jpg",
-  },
-  {
-    name: "Lago Louise",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/new-markets/WEB_sprint_5/ES/lake-louise.jpg",
-  },
-  {
-    name: "Montañas Calvas",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/new-markets/WEB_sprint_5/ES/bald-mountains.jpg",
-  },
-  {
-    name: "Latemar",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/new-markets/WEB_sprint_5/ES/latemar.jpg",
-  },
-  {
-    name: "Parque Nacional de la Vanoise",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/new-markets/WEB_sprint_5/ES/vanoise.jpg",
-  },
-  {
-    name: "Lago di Braies",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/new-markets/WEB_sprint_5/ES/lago.jpg",
-  },
-];
-
-function inicializaGallery(cards) {
-  const contenedor = document.querySelector(".gallery");
-  const plantilla = document.querySelector("#plantilla").content;
-  contenedor.innerHTML = ""; // Limpiar por si acaso
-  initialCards.forEach((item) => {
-    const clon = plantilla.cloneNode(true);
-    clon.querySelector(".card__image").src = item.link;
-    clon.querySelector(".card__image").alt = item.name;
-    clon.querySelector(".card__title").textContent = item.name;
-    contenedor.appendChild(clon);
-  });
-}
+// genero las card con la clase
+initialCards.forEach((item) => {
+  const card = new Card(item, "#plantilla");
+  document.querySelector(".gallery").append(card.generateCard());
+});
 
 function renderSingleCard(item) {
   const contenedor = document.querySelector(".gallery");
@@ -133,8 +100,6 @@ function addItemArray(name, link) {
   initialCards.unshift(newItem);
   renderSingleCard(newItem);
 }
-
-inicializaGallery(initialCards);
 
 function manipulaFormAddCard() {
   quitaNoneAddCard();
@@ -161,33 +126,6 @@ formAddCard.addEventListener("submit", (event) => {
   event.preventDefault(); // prevenir recarga de página
   addItemArray(inputTitle.value, inputLink.value);
   poneNoneAddCard();
-});
-
-//favorito
-const favorito = document.querySelector(".gallery");
-favorito.addEventListener("click", (event) => {
-  if (event.target.classList.contains("card__favorite")) {
-    event.target.classList.toggle("card__favorite-red");
-  }
-});
-
-//borrar card
-document.querySelector(".gallery").addEventListener("click", (event) => {
-  if (event.target.classList.contains("card__delete")) {
-    const card = event.target.closest(".card");
-    const index = parseInt(card.dataset.index, 10);
-    card.remove();
-    if (!isNaN(index)) {
-      initialCards.splice(index, 1);
-    }
-
-    document
-      .querySelectorAll(".gallery .card")
-      .forEach((cardElement, newIndex) => {
-        cardElement.dataset.index = newIndex;
-      });
-    //renderAllCards(initialCards);
-  }
 });
 
 // zoom imagen
