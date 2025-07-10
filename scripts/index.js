@@ -1,4 +1,5 @@
 import { initialCards, Card } from "./Card.js";
+import { FormValidator } from "./FromValidator.js";
 
 // Declaracion de variables
 //variables generales
@@ -84,23 +85,6 @@ initialCards.forEach((item) => {
   document.querySelector(".gallery").append(card.generateCard());
 });
 
-function renderSingleCard(item) {
-  const contenedor = document.querySelector(".gallery");
-  const platilla = document.querySelector("#plantilla").content;
-
-  const clon = platilla.cloneNode(true);
-  clon.querySelector(".card__image").src = item.link;
-  clon.querySelector(".card__image").alt = item.name;
-  clon.querySelector(".card__title").textContent = item.name;
-  contenedor.prepend(clon);
-}
-
-function addItemArray(name, link) {
-  const newItem = { name, link };
-  initialCards.unshift(newItem);
-  renderSingleCard(newItem);
-}
-
 function manipulaFormAddCard() {
   quitaNoneAddCard();
   const inputs = document.querySelectorAll(
@@ -124,7 +108,12 @@ inputLink.value = "";
 
 formAddCard.addEventListener("submit", (event) => {
   event.preventDefault(); // prevenir recarga de página
-  addItemArray(inputTitle.value, inputLink.value);
+
+  const newCard = new Card(
+    { name: inputTitle.value, link: inputLink.value },
+    "#plantilla"
+  );
+  document.querySelector(".gallery").prepend(newCard.generateCard());
   poneNoneAddCard();
 });
 
@@ -173,3 +162,21 @@ const overCard = document.querySelector(".popup-add-card__overlay");
 overCard.addEventListener("click", () => {
   poneNoneAddCard();
 });
+
+// formValidate
+
+const config = {
+  inputSelector: "input",
+  submitButtonSelector: 'button[type="submit"]',
+  inactiveButtonClass: "button_inactive",
+  inputErrorClass: "popup-form__input_type_error",
+  errorClass: "popup-form__input-error_active",
+};
+
+const formPerfil = document.querySelector(".popup-editor-profile__form");
+const validadorPerfil = new FormValidator(config, formPerfil);
+validadorPerfil.enableValidation();
+
+const formCard = document.querySelector(".popup-add-card");
+const validadorCard = new FormValidator(config, formCard);
+validadorCard.enableValidation();

@@ -27,9 +27,9 @@ export const initialCards = [
 
 export class Card {
   constructor({ name, link }, templateSelector) {
-    this.name = name;
-    this.link = link;
-    this.templateSelector = templateSelector;
+    this._name = name;
+    this._link = link;
+    this._templateSelector = templateSelector;
   }
 
   // privados
@@ -55,13 +55,13 @@ export class Card {
   //publicos
   generateCard() {
     const cardElement = document
-      .querySelector(this.templateSelector)
+      .querySelector(this._templateSelector)
       .content.querySelector(".card")
       .cloneNode(true);
 
-    cardElement.querySelector(".card__image").src = this.link;
-    cardElement.querySelector(".card__image").alt = this.name;
-    cardElement.querySelector(".card__title").texContent = this.name;
+    cardElement.querySelector(".card__image").src = this._link;
+    cardElement.querySelector(".card__image").alt = this._name;
+    cardElement.querySelector(".card__title").textContent = this._name;
 
     this._setEventListeners(cardElement);
     return cardElement;
