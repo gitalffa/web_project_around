@@ -1,44 +1,48 @@
 import { initialCards, Card } from "./Card.js";
 import { FormValidator } from "./FromValidator.js";
+import {
+  quitaNoneEditor,
+  poneNoneEditor,
+  quitaNoneAddCard,
+  poneNoneAddCard,
+  manipulaFormAddCard,
+  manipulaFormEdit,
+} from "./utils.js";
 
-// Declaracion de variables
-//variables generales
+// ========== Variables principales ==========
 const page = document.querySelector(".page");
 const popupEditorProfileBase = page.querySelector(
   ".popup-editor-profile__base"
 );
-
-//seccion profile
-const buttonEdit = page.querySelector(".profile-button-edit");
 const popupEditorProfile = page.querySelector(".popup-editor-profile");
-const popupEditorProfileCerrar = page.querySelector(
-  ".popup-editor-profile__close-button"
-);
-const popupEditorProfileInput = page.querySelectorAll(
-  ".popup-editor-profile__input"
-);
 const profileId = document.querySelector(".profile__id");
 const profileName = profileId.querySelector(".profile__name");
 const profileDegree = profileId.querySelector(".profile__degree");
+const buttonEdit = page.querySelector(".profile-button-edit");
+const popupEditorProfileCerrar = page.querySelector(
+  ".popup-editor-profile__close-button"
+);
 
-function manipulaFormEdit() {
-  quitaNoneEditor();
-  const nombre = profileId.querySelector(".profile__name").textContent;
-  const grado = profileId.querySelector(".profile__degree").textContent;
-  const inputs = document.querySelectorAll(
-    ".popup-editor-profile__form .popup-editor-profile__input"
-  );
-  inputs[0].value = nombre;
-  inputs[1].value = grado;
-}
+const popupButtonAdd = page.querySelector(".profile-button-add");
+const popupAddCard = page.querySelector(".popup-add-card");
+const popupAddCardCerrar = page.querySelector(".popup-add-card__close-button");
 
-popupEditorProfileCerrar.addEventListener("click", cerrarEdicion);
-function cerrarEdicion() {
-  poneNoneEditor();
-}
+// ========== Listeners popups ==========
+buttonEdit.addEventListener("click", () =>
+  manipulaFormEdit(profileId, popupEditorProfile)
+);
+popupEditorProfileCerrar.addEventListener("click", () =>
+  poneNoneEditor(popupEditorProfile)
+);
 
-buttonEdit.addEventListener("click", manipulaFormEdit);
+popupButtonAdd.addEventListener("click", () =>
+  manipulaFormAddCard(popupAddCard)
+);
+popupAddCardCerrar.addEventListener("click", () =>
+  poneNoneAddCard(popupAddCard)
+);
 
+// ========== Editar perfil ==========
 const formEditProfile = document.querySelector(".popup-editor-profile__form");
 const inputNombre = formEditProfile.querySelector(
   '.popup-editor-profile__input[placeholder="name"]'
@@ -48,54 +52,22 @@ const inputGrado = formEditProfile.querySelector(
 );
 
 formEditProfile.addEventListener("submit", (event) => {
-  event.preventDefault(); // prevenir recarga de página
-
-  // 3. Actualizar el contenido del perfil
+  event.preventDefault();
   profileName.textContent = inputNombre.value;
   profileDegree.textContent = inputGrado.value;
-  poneNoneEditor();
+  poneNoneEditor(popupEditorProfile);
 });
 
-function quitaNoneEditor() {
-  popupEditorProfile.classList.remove("popup_hidden");
-}
-function poneNoneEditor() {
-  popupEditorProfile.classList.add("popup_hidden");
-}
+// ========== Galería de cards ==========
+const gallery = document.querySelector(".gallery");
 
-//seccion gallery
-const popupButtonAdd = page.querySelector(".profile-button-add");
-const popupAddCard = page.querySelector(".popup-add-card");
-const popupAddCardCerrar = page.querySelector(".popup-add-card__close-button");
-popupAddCardCerrar.addEventListener("click", cerrarAddCard);
-function cerrarAddCard() {
-  poneNoneAddCard();
-}
-
-function quitaNoneAddCard() {
-  popupAddCard.classList.remove("popup_hidden");
-}
-
-function poneNoneAddCard() {
-  popupAddCard.classList.add("popup_hidden");
-}
-// genero las card con la clase
+// Generar las cards iniciales
 initialCards.forEach((item) => {
   const card = new Card(item, "#plantilla");
-  document.querySelector(".gallery").append(card.generateCard());
+  gallery.append(card.generateCard());
 });
 
-function manipulaFormAddCard() {
-  quitaNoneAddCard();
-  const inputs = document.querySelectorAll(
-    ".popup-add-card__form .popup-add-card__input"
-  );
-  inputs[0].value = "";
-  inputs[1].value = "";
-}
-
-popupButtonAdd.addEventListener("click", manipulaFormAddCard);
-
+// ========== Agregar nueva card ==========
 const formAddCard = document.querySelector(".popup-add-card__form");
 const inputTitle = formAddCard.querySelector(
   '.popup-add-card__input[placeholder="Titulo"]'
@@ -103,28 +75,25 @@ const inputTitle = formAddCard.querySelector(
 const inputLink = formAddCard.querySelector(
   '.popup-add-card__input[placeholder="Enlace a la imagen"]'
 );
-inputTitle.value = "";
-inputLink.value = "";
 
 formAddCard.addEventListener("submit", (event) => {
-  event.preventDefault(); // prevenir recarga de página
-
+  event.preventDefault();
   const newCard = new Card(
     { name: inputTitle.value, link: inputLink.value },
     "#plantilla"
   );
-  document.querySelector(".gallery").prepend(newCard.generateCard());
-  poneNoneAddCard();
+  gallery.prepend(newCard.generateCard());
+  poneNoneAddCard(popupAddCard);
 });
 
-// zoom imagen
+// ========== Zoom de imagen (popup global) ==========
 const popup = document.querySelector(".popup");
 const imagenPopup = popup.querySelector(".popup__imagen");
 const cerrarPopup = popup.querySelector(".popup__cerrar");
 const popupFooter = popup.querySelector(".popup__footer");
 
-// Mostrar popup al hacer clic en una imagen
-document.querySelector(".gallery").addEventListener("click", (event) => {
+// Abrir popup al hacer click en una imagen
+gallery.addEventListener("click", (event) => {
   if (event.target.classList.contains("card__image")) {
     imagenPopup.src = event.target.src;
     popupFooter.textContent = event.target.alt;
@@ -132,39 +101,36 @@ document.querySelector(".gallery").addEventListener("click", (event) => {
   }
 });
 
-document.querySelector(".popup").addEventListener("click", (evt) => {
+// Cerrar popup de imagen con overlay
+popup.addEventListener("click", (evt) => {
   if (evt.target.classList.contains("popup")) {
     popup.style.display = "none";
   }
 });
 
-// Cerrar popup al hacer clic en el botón
+// Cerrar popup de imagen con botón
 cerrarPopup.addEventListener("click", () => {
   popup.style.display = "none";
 });
 
-//cerrar con escape popup's imagen
-
+// Cerrar popups con Escape
 document.addEventListener("keydown", function (evt) {
   if (evt.key === "Escape") {
     popup.style.display = "none";
-    poneNoneAddCard();
-    poneNoneEditor();
+    poneNoneAddCard(popupAddCard);
+    poneNoneEditor(popupEditorProfile);
   }
 });
 
+// Cerrar popup de editar perfil con overlay
 const overEditor = document.querySelector(".popup-editor-profile__overlay");
-overEditor.addEventListener("click", () => {
-  poneNoneEditor();
-});
+overEditor.addEventListener("click", () => poneNoneEditor(popupEditorProfile));
 
+// Cerrar popup de agregar card con overlay
 const overCard = document.querySelector(".popup-add-card__overlay");
-overCard.addEventListener("click", () => {
-  poneNoneAddCard();
-});
+overCard.addEventListener("click", () => poneNoneAddCard(popupAddCard));
 
-// formValidate
-
+// ========== Validación de formularios ==========
 const config = {
   inputSelector: "input",
   submitButtonSelector: 'button[type="submit"]',
@@ -173,10 +139,8 @@ const config = {
   errorClass: "popup-form__input-error_active",
 };
 
-const formPerfil = document.querySelector(".popup-editor-profile__form");
-const validadorPerfil = new FormValidator(config, formPerfil);
+const validadorPerfil = new FormValidator(config, formEditProfile);
 validadorPerfil.enableValidation();
 
-const formCard = document.querySelector(".popup-add-card");
-const validadorCard = new FormValidator(config, formCard);
+const validadorCard = new FormValidator(config, formAddCard);
 validadorCard.enableValidation();
