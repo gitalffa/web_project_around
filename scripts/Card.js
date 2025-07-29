@@ -26,10 +26,11 @@ export const initialCards = [
 ];
 
 export class Card {
-  constructor({ name, link }, templateSelector) {
+  constructor({ name, link }, templateSelector, handleCardClick) {
     this._name = name;
     this._link = link;
     this._templateSelector = templateSelector;
+    this._handleCardClick = handleCardClick; // ← guarda el callback
   }
 
   // privados
@@ -50,6 +51,13 @@ export class Card {
     cardElement
       .querySelector(".card__favorite")
       .addEventListener("click", this._handlerFavorite);
+
+    cardElement.querySelector(".card__image").addEventListener("click", () => {
+      this._handleCardClick({
+        src: this._link,
+        alt: this._alt,
+      });
+    });
   }
 
   //publicos

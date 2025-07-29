@@ -14,7 +14,7 @@
   </head>
   <body>
     <div class="page">
-      <div class="popup" id="popupImage">
+      <div class="popup popup_hidden" id="popupImage">
         <div class="popup__contenido">
           <img src="" alt="Imagen Ampliada" class="popup__imagen" />
           <button class="popup__cerrar">✖</button>
@@ -31,6 +31,7 @@
                 type="text"
                 class="popup-editor-profile__input"
                 placeholder="name"
+                name="name"
                 minlength="3"
                 maxlength="40"
                 id="name"
@@ -47,6 +48,7 @@
                 minlength="3"
                 maxlength="40"
                 id="degree"
+                name="degree"
                 autocomplete="organization-title"
                 required
               />
@@ -73,6 +75,7 @@
                 minlength="2"
                 maxlength="30"
                 id="titulo"
+                name="titulo"
                 required
               />
               <span class="popup-form__input-error titulo-error"></span>
@@ -84,6 +87,7 @@
                 placeholder="Enlace a la imagen"
                 minlength="2"
                 id="enlace"
+                name="enlace"
                 required
               />
               <span class="popup-form__input-error enlace-error"></span>
