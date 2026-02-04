@@ -1,4 +1,4 @@
-export const initialCards = [
+/* export const initialCards = [
   {
     name: "Valle de Yosemite",
     link: "https://practicum-content.s3.us-west-1.amazonaws.com/new-markets/WEB_sprint_5/ES/yosemite.jpg",
@@ -23,7 +23,15 @@ export const initialCards = [
     name: "Lago di Braies",
     link: "https://practicum-content.s3.us-west-1.amazonaws.com/new-markets/WEB_sprint_5/ES/lago.jpg",
   },
-];
+]; */
+
+export function getInitialCards() {
+  return fetch("https://around-api.es.tripleten-services.com/v1/cards/", {
+    headers: {
+      authorization: "64cef1a0-a8ed-45ba-8f33-ded402d03893",
+    },
+  }).then((res) => res.json());
+}
 
 export class Card {
   constructor({ name, link }, templateSelector, handleCardClick) {

@@ -1,6 +1,7 @@
 import { Popup } from "./Popup.js";
 import { Section } from "./Section.js";
-import { initialCards, Card } from "./Card.js";
+import { Card } from "./Card.js";
+import { getInitialCards } from "./Card.js";
 import { FormValidator } from "./FromValidator.js";
 import {
   quitaNoneEditor,
@@ -46,10 +47,10 @@ popupEditorProfileCerrar.addEventListener("click", () =>
 ); */
 
 popupButtonAdd.addEventListener("click", () =>
-  manipulaFormAddCard(popupAddCard)
+  manipulaFormAddCard(popupAddCard),
 );
 popupAddCardCerrar.addEventListener("click", () =>
-  poneNoneAddCard(popupAddCard)
+  poneNoneAddCard(popupAddCard),
 );
 
 // ========== Editar perfil ==========
@@ -61,16 +62,16 @@ const popupEditProfile = new PopupWithForm(
       name: formData.name,
       degree: formData.degree,
     });
-  }
+  },
 );
 popupEditProfile.setEventListeners();
 
 const formEditProfile = document.querySelector(".popup-editor-profile__form");
 const inputNombre = formEditProfile.querySelector(
-  '.popup-editor-profile__input[placeholder="name"]'
+  '.popup-editor-profile__input[placeholder="name"]',
 );
 const inputGrado = formEditProfile.querySelector(
-  '.popup-editor-profile__input[placeholder="Degree"]'
+  '.popup-editor-profile__input[placeholder="Degree"]',
 );
 
 buttonEdit.addEventListener("click", () => {
@@ -98,23 +99,26 @@ popupImage.setEventListeners();
   gallery.append(card.generateCard());
 }); */
 
-const cardSection = new Section(
-  {
-    items: initialCards,
-    renderer: (item) => {
-      const card = new Card(
-        item,
-        "#plantilla",
-        popupImage.open.bind(popupImage) // ←  el método open ya “bindeado”
-      );
-      const cardElement = card.generateCard();
-      cardSection.addItem(cardElement);
+let cardSection;
+getInitialCards().then((initialCards) => {
+  cardSection = new Section(
+    {
+      items: initialCards,
+      renderer: (item) => {
+        const card = new Card(
+          item,
+          "#plantilla",
+          popupImage.open.bind(popupImage), // ←  el método open ya “bindeado”
+        );
+        const cardElement = card.generateCard();
+        cardSection.addItem(cardElement);
+      },
     },
-  },
-  ".gallery"
-);
+    ".gallery",
+  );
+  cardSection.renderItems();
+});
 
-cardSection.renderItems();
 // ========== Agregar nueva card ==========
 const formAddCard = document.querySelector(".popup-add-card__form");
 /*const inputTitle = formAddCard.querySelector(
@@ -140,7 +144,7 @@ const popupAddCardForm = new PopupWithForm(".popup-add-card", (formData) => {
   const newCard = new Card(
     { name: formData.titulo, link: formData.enlace },
     "#plantilla",
-    popupImage.open.bind(popupImage)
+    popupImage.open.bind(popupImage),
   );
   cardSection.addItem(newCard.generateCard());
 });
