@@ -25,14 +25,6 @@
   },
 ]; */
 
-export function getInitialCards() {
-  return fetch("https://around-api.es.tripleten-services.com/v1/cards/", {
-    headers: {
-      authorization: "64cef1a0-a8ed-45ba-8f33-ded402d03893",
-    },
-  }).then((res) => res.json());
-}
-
 export class Card {
   constructor({ name, link }, templateSelector, handleCardClick) {
     this._name = name;

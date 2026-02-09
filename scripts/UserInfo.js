@@ -1,7 +1,8 @@
 export class UserInfo {
-  constructor({ nameSelector, degreeSelector }) {
+  constructor({ nameSelector, degreeSelector, avatarSelector }) {
     this._nameElement = document.querySelector(nameSelector);
     this._degreeElement = document.querySelector(degreeSelector);
+    this._avatarElement = document.querySelector(avatarSelector);
   }
 
   getUserInfo() {
@@ -11,8 +12,9 @@ export class UserInfo {
     };
   }
 
-  setUserInfo({ name, degree }) {
+  setUserInfo({ name, about, avatar }) {
     if (name) this._nameElement.textContent = name;
-    if (degree) this._degreeElement.textContent = degree;
+    if (about) this._degreeElement.textContent = about;
+    if (avatar && this._avatarElement) this._avatarElement.src = avatar;
   }
 }
