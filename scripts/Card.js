@@ -26,52 +26,117 @@
 ]; */
 
 export class Card {
-  constructor({ name, link }, templateSelector, handleCardClick) {
+  constructor(
+    { name, link, _id, isLiked, likes = [] },
+    templateSelector,
+    handleCardClick,
+    { handleLike, handleDelete } = {},
+  ) {
     this._name = name;
     this._link = link;
+    this._id = _id;
+
     this._templateSelector = templateSelector;
-    this._handleCardClick = handleCardClick; // ← guarda el callback
+    this._handleCardClick = handleCardClick;
+
+    this._handleLike = handleLike;
+    this._handleDelete = handleDelete;
+
+    this._isLiked = Boolean(isLiked);
+    this._likes = likes; // ✅ antes no lo estabas guardando
+  }
+
+  // públicos “pequeños” para callbacks
+  getId() {
+    return this._id;
+  }
+
+  isLiked() {
+    return this._isLiked;
   }
 
   // privados
+  _handlerDelete = () => {
+    // Si hay callback (server), borra en server y luego en DOM
+    if (this._handleDelete) {
+      this._handleDelete(this)
+        .then(() => this._cardElement.remove())
+        .catch((err) => console.error("delete error:", err));
+      return;
+    }
 
-  _handlerDelete = (evt) => {
-    evt.target.closest(".card").remove();
+    // fallback local
+    this._cardElement.remove();
   };
 
-  _handlerFavorite = (evt) => {
-    evt.target.classList.toggle("card__favorite-red");
+  _handlerFavorite = () => {
+    // Con server
+    if (this._handleLike) {
+      this._handleLike(this)
+        .then((updatedCard) => {
+          this._setLikes(updatedCard.likes);
+        })
+        .catch((err) => console.error("like error:", err));
+      return;
+    }
+
+    // fallback local
+    this._isLiked = !this._isLiked;
+    this._renderLikeState();
   };
 
-  _setEventListeners(cardElement) {
-    cardElement
-      .querySelector(".card__delete")
-      .addEventListener("click", this._handlerDelete);
+  _setLikes(likes) {
+    this._likes = likes;
 
-    cardElement
-      .querySelector(".card__favorite")
-      .addEventListener("click", this._handlerFavorite);
+    // ✅ Por ahora togglamos (funciona), después lo haremos “perfecto” con currentUserId
+    this._isLiked = !this._isLiked;
 
-    cardElement.querySelector(".card__image").addEventListener("click", () => {
-      this._handleCardClick({
-        src: this._link,
-        alt: this._alt,
-      });
+    this._renderLikeState();
+
+    if (this._likeCounter) {
+      this._likeCounter.textContent = likes.length;
+    }
+  }
+
+  _renderLikeState() {
+    if (this._isLiked) {
+      this._likeButton.classList.add("card__favorite-red");
+    } else {
+      this._likeButton.classList.remove("card__favorite-red");
+    }
+  }
+
+  _setEventListeners() {
+    this._deleteButton.addEventListener("click", this._handlerDelete);
+    this._likeButton.addEventListener("click", this._handlerFavorite);
+
+    this._image.addEventListener("click", () => {
+      this._handleCardClick({ src: this._link, alt: this._name });
     });
   }
 
-  //publicos
   generateCard() {
-    const cardElement = document
+    this._cardElement = document
       .querySelector(this._templateSelector)
       .content.querySelector(".card")
       .cloneNode(true);
 
-    cardElement.querySelector(".card__image").src = this._link;
-    cardElement.querySelector(".card__image").alt = this._name;
-    cardElement.querySelector(".card__title").textContent = this._name;
+    this._image = this._cardElement.querySelector(".card__image");
+    this._deleteButton = this._cardElement.querySelector(".card__delete");
+    this._likeButton = this._cardElement.querySelector(".card__favorite");
+    this._likeCounter = this._cardElement.querySelector(
+      ".card__favorite-count",
+    );
 
-    this._setEventListeners(cardElement);
-    return cardElement;
+    this._image.src = this._link;
+    this._image.alt = this._name;
+    this._cardElement.querySelector(".card__title").textContent = this._name;
+
+    // Estado inicial
+    this._renderLikeState();
+    if (this._likeCounter) this._likeCounter.textContent = this._likes.length;
+
+    this._setEventListeners();
+    return this._cardElement;
   }
 }

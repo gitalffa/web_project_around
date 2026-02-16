@@ -21,10 +21,12 @@ export class Api {
   }
 
   _request(path, options = {}) {
+    const headers = { ...this._getHeaders(), ...(options.headers || {}) };
+
     return fetch(`${this._baseUrl}${path}`, {
-      headers: this._getHeaders(),
       ...options,
-    }).then(this._checkResponse);
+      headers,
+    }).then((res) => this._checkResponse(res));
   }
 
   // ===== USERS =====

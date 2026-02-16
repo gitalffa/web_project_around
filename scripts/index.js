@@ -1,68 +1,51 @@
-import { Popup } from "./Popup.js";
 import { Section } from "./Section.js";
 import { Card } from "./Card.js";
-
 import { FormValidator } from "./FromValidator.js";
-import {
-  quitaNoneEditor,
-  poneNoneEditor,
-  quitaNoneAddCard,
-  poneNoneAddCard,
-  manipulaFormAddCard,
-  manipulaFormEdit,
-} from "./utils.js";
 import { PopupWithImage } from "./PopupWithImage.js";
 import { PopupWithForm } from "./PopupWithForm.js";
 import { UserInfo } from "./UserInfo.js";
 import { api } from "./api.js";
 
-//==============UserInfo ============
-// creo las instancia de userInfo donde le doy los selectores html para insertar la informacion
-
+//============== UserInfo ============
 const userInfo = new UserInfo({
   nameSelector: ".profile__name",
   degreeSelector: ".profile__degree",
   avatarSelector: ".profile__avatar",
 });
 
-// de api.js uso el metodo getUser que me da el objeto que llego del fetch
-// user ya trae {name, about, avatar, _id}
-// en la instancia userInfo exite un metodo que te setea la info
+// Guardaremos el id del usuario actual (para mejorar likes después)
+let currentUserId = null;
 
-api.getUser().then((user) => {
-  userInfo.setUserInfo(user);
-});
+api
+  .getUser()
+  .then((user) => {
+    currentUserId = user._id;
+    userInfo.setUserInfo(user);
+  })
+  .catch((err) => console.error("getUser error:", err));
 
 // ========== Variables principales ==========
 const page = document.querySelector(".page");
-
 const buttonEdit = page.querySelector(".profile-button-edit");
-
 const popupButtonAdd = page.querySelector(".profile-button-add");
-const popupAddCard = page.querySelector(".popup-add-card");
-const popupAddCardCerrar = page.querySelector(".popup-add-card__close-button");
 
-// ========== Listeners popups ==========
+// ========== Popup de imagen ==========
+const popupImage = new PopupWithImage(".popup");
+popupImage.setEventListeners();
 
-popupButtonAdd.addEventListener("click", () =>
-  manipulaFormAddCard(popupAddCard),
-);
-popupAddCardCerrar.addEventListener("click", () =>
-  poneNoneAddCard(popupAddCard),
-);
+// ========== Callbacks para Card (Like/Delete) ==========
+const handleLike = (cardInstance) => {
+  if (cardInstance.isLiked()) {
+    return api.unlikeCard(cardInstance.getId());
+  }
+  return api.likeCard(cardInstance.getId());
+};
+
+const handleDelete = (cardInstance) => {
+  return api.deleteCard(cardInstance.getId());
+};
 
 // ========== Editar perfil ==========
-/* const popupEditProfile = new PopupWithForm(
-  ".popup-editor-profile",
-  (formData) => {
-    //  console.log("FORM DATA:", formData);
-    userInfo.setUserInfo({
-      name: formData.name,
-      degree: formData.degree,
-    });
-  },
-); */
-
 const popupEditProfile = new PopupWithForm(
   ".popup-editor-profile",
   (formData) => {
@@ -73,10 +56,12 @@ const popupEditProfile = new PopupWithForm(
       })
       .then((user) => {
         userInfo.setUserInfo(user);
+        popupEditProfile.close?.();
       })
       .catch((err) => console.error("updateUser error:", err));
   },
 );
+
 popupEditProfile.setEventListeners();
 
 const formEditProfile = document.querySelector(".popup-editor-profile__form");
@@ -95,16 +80,8 @@ buttonEdit.addEventListener("click", () => {
 });
 
 // ========== Galería de cards ==========
-const gallery = document.querySelector(".gallery");
-const popupImage = new PopupWithImage(".popup"); //<--- aqui
-popupImage.setEventListeners();
-
-// Generar las cards iniciales
-
-//declaro cardSection para tenerlo golbal en todo el archivo
 let cardSection;
 
-// en la instacia de api uso el metodo getCards para traerme del servidor las cards existentes en el
 api
   .getCards()
   .then((cards) => {
@@ -115,14 +92,17 @@ api
           const card = new Card(
             item,
             "#plantilla",
-            popupImage.open.bind(popupImage), // ←  el método open ya “bindeado”
+            popupImage.open.bind(popupImage),
+            { handleLike, handleDelete },
           );
+
           const cardElement = card.generateCard();
           cardSection.addItem(cardElement);
         },
       },
       ".gallery",
     );
+
     cardSection.renderItems();
   })
   .catch((err) => console.error("getCards error:", err));
@@ -131,37 +111,34 @@ api
 const formAddCard = document.querySelector(".popup-add-card__form");
 
 const popupAddCardForm = new PopupWithForm(".popup-add-card", (formData) => {
-  console.log("Form data (card):", formData); // <-- aquí
-  const newCard = new Card(
-    { name: formData.titulo, link: formData.enlace },
-    "#plantilla",
-    popupImage.open.bind(popupImage),
-  );
-  cardSection.addItem(newCard.generateCard());
+  if (!cardSection) {
+    console.error(
+      "cardSection aún no está listo. Espera a que carguen las cards.",
+    );
+    return;
+  }
+
+  api
+    .addCard({ name: formData.titulo, link: formData.enlace })
+    .then((res) => {
+      const newCard = new Card(
+        res,
+        "#plantilla",
+        popupImage.open.bind(popupImage),
+        { handleLike, handleDelete },
+      );
+
+      cardSection.addItem(newCard.generateCard());
+      popupAddCardForm.close?.();
+      formAddCard.reset?.();
+    })
+    .catch((err) => console.error("addCard error:", err));
 });
+
 popupAddCardForm.setEventListeners();
 
 popupButtonAdd.addEventListener("click", () => {
   popupAddCardForm.open();
-});
-
-// ========== Zoom de imagen (popup global) ==========
-
-/* const imagenPopup = document.querySelector(".popup__imagen");
-
-const popupFooter = document.querySelector(".popup__footer"); */
-
-//========== instancia del popup ============
-
-// Abrir popup al hacer click en una imagen
-
-gallery.addEventListener("click", (event) => {
-  if (event.target.classList.contains("card__image")) {
-    popupImage.open({
-      src: event.target.src,
-      alt: event.target.alt,
-    });
-  }
 });
 
 // ========== Validación de formularios ==========
