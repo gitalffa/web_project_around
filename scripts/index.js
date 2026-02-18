@@ -5,6 +5,7 @@ import { PopupWithImage } from "./PopupWithImage.js";
 import { PopupWithForm } from "./PopupWithForm.js";
 import { UserInfo } from "./UserInfo.js";
 import { api } from "./api.js";
+import { PopupWithConfirmation } from "./PopupWithConfirmation.js";
 
 //============== UserInfo ============
 const userInfo = new UserInfo({
@@ -41,8 +42,21 @@ const handleLike = (cardInstance) => {
   return api.likeCard(cardInstance.getId());
 };
 
+const confirmDeletePopup = new PopupWithConfirmation(".popup-confirm-delete");
+confirmDeletePopup.setEventListeners();
+
 const handleDelete = (cardInstance) => {
-  return api.deleteCard(cardInstance.getId());
+  confirmDeletePopup.setSubmitAction(() => {
+    api
+      .deleteCard(cardInstance.getId())
+      .then(() => {
+        cardInstance.removeCard(); // lo agregamos abajo
+        confirmDeletePopup.close();
+      })
+      .catch((err) => console.error("deleteCard error:", err));
+  });
+
+  confirmDeletePopup.open();
 };
 
 // ========== Editar perfil ==========

@@ -16,6 +16,34 @@
   background-color: rgba(0, 0, 0, 0.5);
   z-index: 1;
 }
+.popup-confirm-delete__overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1;
+}
+
+.popup__submit {
+  background-color: black;
+  border-radius: 8px;
+  width: 358px;
+  height: 50px;
+  color: white;
+  margin: 0 auto;
+  display: block;
+}
+.popup__container {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* 👈 centra horizontalmente */
+}
+
+.popup__title {
+  text-align: center;
+}
 
 .popup-editor-profile__base {
   background-color: rgba(255, 255, 255, 1);
@@ -24,7 +52,7 @@
   height: 330px;
   border-radius: 8px;
   position: absolute;
-  top: 18%;
+  top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 4;
@@ -36,7 +64,19 @@
   height: 330px;
   border-radius: 8px;
   position: absolute;
-  top: 18%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 4;
+}
+.popup-editor-profile__confirm-delete_base {
+  width: 430px;
+  height: 181px;
+  background-color: rgba(255, 255, 255, 1);
+  border: 1px solid white;
+  border-radius: 8px;
+  position: absolute;
+  top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 4;
@@ -288,7 +328,17 @@
     height: 322px;
   }
   .popup-add-card__base {
+    top: 20%;
     width: 282px;
     height: 322px;
+  }
+  .popup__submit {
+    width: 258px;
+    height: 50px;
+  }
+
+  .popup-editor-profile__confirm-delete_base {
+    width: 330px;
+    height: 181px;
   }
 }

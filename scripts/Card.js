@@ -55,13 +55,16 @@ export class Card {
     return this._isLiked;
   }
 
+  removeCard() {
+    this._cardElement.remove();
+    this._cardElement = null;
+  }
+
   // privados
   _handlerDelete = () => {
     // Si hay callback (server), borra en server y luego en DOM
     if (this._handleDelete) {
-      this._handleDelete(this)
-        .then(() => this._cardElement.remove())
-        .catch((err) => console.error("delete error:", err));
+      this._handleDelete(this);
       return;
     }
 

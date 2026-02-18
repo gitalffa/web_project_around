@@ -32,7 +32,8 @@ export class Popup {
       if (
         evt.target === this._popup ||
         evt.target.classList.contains("popup-editor-profile__overlay") ||
-        evt.target.classList.contains("popup-add-card__overlay")
+        evt.target.classList.contains("popup-add-card__overlay") ||
+        evt.target.classList.contains("popup-confirm-delete__overlay")
       ) {
         this.close();
       }
