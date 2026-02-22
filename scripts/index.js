@@ -63,6 +63,7 @@ const handleDelete = (cardInstance) => {
 const popupEditProfile = new PopupWithForm(
   ".popup-editor-profile",
   (formData) => {
+    popupEditProfile.renderLoading(true);
     api
       .updateUser({
         name: formData.name,
@@ -72,7 +73,8 @@ const popupEditProfile = new PopupWithForm(
         userInfo.setUserInfo(user);
         popupEditProfile.close?.();
       })
-      .catch((err) => console.error("updateUser error:", err));
+      .catch((err) => console.error("updateUser error:", err))
+      .finally(() => popupEditProfile.renderLoading(false));
   },
 );
 
@@ -91,6 +93,27 @@ buttonEdit.addEventListener("click", () => {
   inputNombre.value = name;
   inputGrado.value = degree;
   popupEditProfile.open();
+});
+
+//edita avatar
+
+const popupAvatar = new PopupWithForm(".popup-avatar", (formData) => {
+  popupAvatar.renderLoading(true);
+  api
+    .updateAvatar(formData.avatar)
+    .then((user) => {
+      userInfo.setUserInfo(user);
+      popupAvatar.close();
+    })
+    .catch((err) => console.error("updateAvatar error", err))
+    .finally(() => popupAvatar.renderLoading(false));
+});
+
+popupAvatar.setEventListeners();
+
+const avatarButton = document.querySelector(".profile__avatar-button");
+avatarButton.addEventListener("click", () => {
+  popupAvatar.open();
 });
 
 // ========== Galería de cards ==========
@@ -131,7 +154,7 @@ const popupAddCardForm = new PopupWithForm(".popup-add-card", (formData) => {
     );
     return;
   }
-
+  popupAddCardForm.renderLoading(true);
   api
     .addCard({ name: formData.titulo, link: formData.enlace })
     .then((res) => {
@@ -146,7 +169,8 @@ const popupAddCardForm = new PopupWithForm(".popup-add-card", (formData) => {
       popupAddCardForm.close?.();
       formAddCard.reset?.();
     })
-    .catch((err) => console.error("addCard error:", err));
+    .catch((err) => console.error("addCard error:", err))
+    .finally(() => popupAddCardForm.renderLoading(false));
 });
 
 popupAddCardForm.setEventListeners();

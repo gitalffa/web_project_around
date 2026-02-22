@@ -36,7 +36,27 @@
           </div>
         </div>
       </div>
-
+      <div class="popup popup-avatar popup_hidden">
+        <div class="popup__container">
+          <div class="popup-avatar__base">
+            <button type="button" class="popup__close-button popup__cerrar">
+              ✖
+            </button>
+            <form name="avatar" class="popup__form popup-avatar__form">
+              <h2 class="popup__title">Cambiar avatar</h2>
+              <input
+                type="url"
+                name="avatar"
+                placeholder="Enlace a la imagen"
+                required
+                class="popup-form__input"
+              />
+              <span class="popup-form__input-error"></span>
+              <button type="submit" class="popup__submit">Guardar</button>
+            </form>
+          </div>
+        </div>
+      </div>
       <div class="popup-editor-profile popup_hidden">
         <div class="popup-editor-profile__overlay"></div>
         <div class="popup-editor-profile__base">
@@ -127,7 +147,15 @@
       </header>
       <main class="content">
         <section class="profile">
-          <img src="" alt="Avatar de Cousteau" class="profile__avatar" />
+          <button
+            class="profile__avatar-button"
+            type="button"
+            aria-label="Editar avatar"
+          >
+            <img src="" alt="Avatar de Cousteau" class="profile__avatar" />
+            <span class="profile__avatar-overlay"></span>
+          </button>
+
           <div class="profile__id">
             <div class="profile__id-textos">
               <p class="profile__name"></p>

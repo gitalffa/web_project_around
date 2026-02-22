@@ -1,3 +1,31 @@
+/** popup avatar */
+.popup-avatar__base {
+  width: 430px;
+  height: 181px;
+  background-color: rgba(255, 255, 255, 1);
+  border: 1px solid white;
+  border-radius: 8px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 4;
+}
+
+.popup-avatar__form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.popup-form__input {
+  width: 358px;
+  margin: 20px auto;
+  border: none;
+  border-bottom: 2px solid rgba(115, 107, 107, 0.3);
+}
+/* popup fin*/
+
 .popup-editor-profile__overlay {
   position: absolute;
   top: 0;
@@ -24,6 +52,18 @@
   height: 100%;
   background-color: rgba(0, 0, 0, 0.5);
   z-index: 1;
+}
+.popup-editor-profile__confirm-delete_base {
+  width: 430px;
+  height: 181px;
+  background-color: rgba(255, 255, 255, 1);
+  border: 1px solid white;
+  border-radius: 8px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 4;
 }
 
 .popup__submit {
@@ -62,18 +102,6 @@
   border: 1px solid white;
   width: 430px;
   height: 330px;
-  border-radius: 8px;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 4;
-}
-.popup-editor-profile__confirm-delete_base {
-  width: 430px;
-  height: 181px;
-  background-color: rgba(255, 255, 255, 1);
-  border: 1px solid white;
   border-radius: 8px;
   position: absolute;
   top: 50%;
