@@ -91,7 +91,7 @@
   inset: 0;
   border-radius: 50%;
   background-color: rgba(0, 0, 0, 0.6);
-  background-image: url("../images/lapiz.png"); /* tu ícono de lápiz */
+  background-image: url("../../images/lapiz.png"); /* tu ícono de lápiz */
   background-repeat: no-repeat;
   background-position: center;
   background-size: 26px 26px; /* ajusta */
